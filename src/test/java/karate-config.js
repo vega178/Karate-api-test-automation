@@ -28,6 +28,7 @@ function fn() {
       karate.log('User doesnt exists', env);
   }
 
+  //karateSingle = "before all features and scenarios once"
   var loginServiceResponse = karate.callSingle('classpath:helpers/login.feature', config).sessionToken;
   karate.configure('headers', {Authorization: 'Token ' + loginServiceResponse});
 
