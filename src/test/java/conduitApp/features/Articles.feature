@@ -1,5 +1,5 @@
 
-@smoke
+@smoke @parallel=false
 Feature: Articles
 
   Background: Define URL
@@ -22,7 +22,7 @@ Feature: Articles
       Then status 200
       * def testArticleTitle = call read('HomePage.feature@get_articles_test_1')
       * def articleTitle = testArticleTitle.articleTitle
-      And match response.article.title == articleBodyData.article.title
+      And match response.article.title == articleBodyData[0].article.title
 
   @debug
     Scenario: Create and Delete a new article
@@ -37,7 +37,7 @@ Feature: Articles
       Given path '/articles'
       When method Get
       Then status 200
-      And match response.articles[0].title == articleBodyData.article.title
+      And match response.articles[0].title == articleBodyData[0].article.title
 
       #Given header Authorization = 'Token ' + sessionToken
       Given path '/articles',articleId
@@ -48,4 +48,4 @@ Feature: Articles
       Given path '/articles'
       When method Get
       Then status 200
-      And match response.articles[0].title != articleBodyData.article.title
+      And match response.articles[0].title != articleBodyData[0].article.title

@@ -1,4 +1,4 @@
-
+@debug
   Feature: Home Work
 
     Background: Preconditions
@@ -75,6 +75,7 @@
       """
       And match response.articles[*].slug contains any articleSlug
 
+    @debug
       Scenario: Comment articles
         Given params { limit: 10, offset: 0}
         Given path '/articles'
