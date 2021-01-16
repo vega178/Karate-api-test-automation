@@ -1,0 +1,15 @@
+[
+  {
+    "article": {
+      "tagList": [],
+      "title": "Test Article",
+      "description": "Test Description",
+      "body": "Bla bla"
+    }
+  },
+  {
+    "comment": {
+      "body": "dataBody"
+    }
+  }
+]
