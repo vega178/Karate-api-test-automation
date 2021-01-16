@@ -7,6 +7,7 @@ Feature: Sing up new user
     * def randomUserName = dataGenerator.getRandomUserName()
     Given url baseUrl
 
+  @debug
     Scenario: New user Sing up
       * def timeValidator = read('classpath:helpers/timeValidator.js')
       * def jsFunction =
@@ -47,7 +48,7 @@ Feature: Sing up new user
             }
         }
       """
-
+  @debug @parallel=false
       Scenario Outline: Validate sing up error messages
         Given path 'users'
         And request
