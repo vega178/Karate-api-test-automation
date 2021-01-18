@@ -7,3 +7,5 @@ Karate API test automation scripts
 - docker run -it karatetest
 - docker-compose up --build
 - docker-compose down
+
+# Performance testing with Gatlin
