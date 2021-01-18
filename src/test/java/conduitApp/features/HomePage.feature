@@ -58,3 +58,56 @@ Feature: Test for the home page
         }
     """
     * def articleTitle = response.articles[0].title
+
+  @debug
+    Scenario: Conditional logic
+      Given params { limit: 10, offset: 0}
+      Given path '/articles'
+      When method Get
+      Then status 200
+      * def favoritesCount = response.articles[0].favoritesCount
+      * def article = response.articles[0]
+
+      * if (favoritesCount == 0) karate.call('classpath:helpers/AddLikes.feature', article)
+      * def result = (favoritesCount == 0) ? karate.call('classpath:helpers/AddLikes.feature', article).likesCount : favoritesCount
+
+      Given params { limit: 10, offset: 0}
+      Given path '/articles'
+      When method Get
+      Then status 200
+      And match response.articles[0].favoritesCount == result
+
+  @debug
+    Scenario: Retry call
+      * configure retry = { count: 10, interval: 5000 }
+
+      Given params { limit: 10, offset: 0}
+      Given path '/articles'
+      And retry until response.articles[0].favoritesCount == 1
+      When method Get
+      Then status 200
+
+  @debug
+    Scenario: Sleep call
+      * def sleep = function(pause){ java.lang.Thread.sleep(pause) }
+
+      Given params { limit: 10, offset: 0}
+      Given path '/articles'
+      When method Get
+      * eval sleep(10000)
+      Then status 200
+
+  # Type convertion
+  @debug
+    Scenario: Number to string
+      * def numToconvert = 10
+      * def json = { "bar": #(numToconvert+'')}
+      * match json == { "bar" : '10'}
+
+  @debug
+    Scenario: String to number
+      * def numToconvert = '10'
+      * def json = {"bar": #(numToconvert*1)}
+      * def json2 = {"bar": #(~~parseInt(numToconvert))}
+      * match json == {"bar": 10}
+      * match json2 == {"bar": 10}
