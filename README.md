@@ -9,3 +9,4 @@ Karate API test automation scripts
 - docker-compose down
 
 # Performance testing with Gatlin
+- mvn clean test-compile gatling:test
