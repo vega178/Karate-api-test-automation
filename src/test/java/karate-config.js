@@ -24,6 +24,10 @@ function fn() {
       config.userEmail = 'estebanvegapatio_qa@gmail.com';
       config.userPassword = 'Ab1234567!';
       break;
+    case 'stg':
+      config.userEmail = 'karate_stg@prueba.com';
+      config.userPassword = 'Ab1234567!';
+      break;
     default :
       karate.log('User doesnt exists', env);
   }

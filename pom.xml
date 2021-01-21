@@ -14,6 +14,7 @@
         <karate.version>0.9.6</karate.version>
         <javafaker.version>1.0.2</javafaker.version>
         <cucumber.reporting>5.3.0</cucumber.reporting>
+        <gatling.plugin.version>3.1.1</gatling.plugin.version>
     </properties>    
 
     <dependencies>
@@ -38,6 +39,12 @@
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
             <version>${cucumber.reporting}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intuit.karate</groupId>
+            <artifactId>karate-gatling</artifactId>
+            <version>${karate.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -71,8 +78,17 @@
                         <karate.options>--tags ~@ignore</karate.options>
                     </systemProperties>
                 </configuration>
-            </plugin>            
-        </plugins>        
+            </plugin>
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>${gatling.plugin.version}</version>
+                <configuration>
+                    <simulationsFolder>src/test/java/conduitApp/performance</simulationsFolder>
+                    <configFolder>src/test/java/conduitApp/performance/data</configFolder>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>       
     
 </project>
